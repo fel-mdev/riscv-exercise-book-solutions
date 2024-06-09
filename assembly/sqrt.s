@@ -48,19 +48,21 @@ _start:
 
 
     # b = a / 2
-    li t2, 2
-    div t1, t0, t2
+    li t2, 2                # t2 = 2
+    div t1, t0, t2          # b = a / 2
+    li t3, 0                # t3 = i
+    li t5, 10               # t5 = loop iterations
 
     LOOP:
-        mv t3, t1           # pre_b
-        div t1, t0, t3      # a/b
-        add t1, t1, t3      # b + a/b
+        mv t4, t1           # pre_b
+        div t1, t0, t4      # a/b
+        add t1, t1, t4      # b + a/b
         div t1, t1, t2      # (b + a/b) / 2
-        bne t1, t3, LOOP    # continue loop if not equal
+        add t3, t3, 1       # t3 += 1
+        bne t3, t5, LOOP    # continue loop if not equal
 
 
     # convert to and store result as ascii
-
     la t3, numbers
 
     li t2, 1000
